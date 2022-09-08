@@ -11,13 +11,13 @@ module.exports = class Codeblocks extends Plugin {
   }
 
   pluginWillUnload () {
-    uninject('pc-codeblocks-format');
+    uninject('better-codeblocks-format');
     this._forceUpdate();
   }
 
   async patchCodeblocks () {
     const parser = await getModule([ 'parse', 'parseTopic' ]);
-    inject('pc-codeblocks-format', parser.defaultRules.codeBlock, 'react', (args, res) => {
+    inject('better-codeblocks-format', parser.defaultRules.codeBlock, 'react', (args, res) => {
       this.injectCodeblock(args, res);
 
       return res;
